@@ -3,7 +3,7 @@ More and more evidence indicates that the dysregulations of microRNAs (miRNAs) l
 # The workflow of SPLDHyperAWNTF model
 ![The workflow of SPLDHyperAWNTF model](https://github.com/Ouyang-Dong/SPLDHyperAWNTF_Model/blob/master/workflow.jpg)
 # Environment Requirement
-The code has been tested running under Python 3.8.5. The required packages are as follows:
+The code has been tested running under Python 3.8. The required packages are as follows:
 1. tensorly == 0.5.1
 2. numpy == 1.21.5
 3. pandas == 1.3.5
