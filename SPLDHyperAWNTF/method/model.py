@@ -9,7 +9,7 @@ class Hyper_Model(object):
         super().__init__()
         self.name = name
 
-    def SPLDHyperAWNTF(self, X, m_embeding, d_embeding, W, r=4, alpha = 1, beta = 0.0002, lam_t = 0.001, lam_c = 1, max_iter=2000, tol=1e-5):
+    def SPLDHyperAWNTF(self, X, m_embeding, d_embeding, W, r=4, alpha = 2, beta = 2, lam_t = 0.001, lam_c = 0.3, max_iter=2000, tol=1e-5):
 
 
         m = X.shape[0]
