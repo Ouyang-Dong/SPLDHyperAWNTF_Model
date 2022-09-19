@@ -48,7 +48,7 @@ class Hyper_Model(object):
         W_2 = np.mat(tl.unfold(W, 1))
         W_3 = np.mat(tl.unfold(W, 2))
 
-        k = 0.6
+        k = 1.2
         k_end = 0.008
         gama = 1.2
 
@@ -126,30 +126,33 @@ class Hyper_Model(object):
             New_X_3 = np.mat(tl.unfold(output_X, 2))
             for I in range(New_X_1.shape[0]):
                 for S in range(New_X_1.shape[1]):
-                    if (math.pow((New_X_1[I, S] - X_1[I, S]), 2) <= 1 / math.pow((k + 1 / gama), 2)):
+                    loss1 = math.pow((X_1[I, S] - New_X_1[I, S] + (I_1[I,S] - X_1[I, S]) * C_1[I,S]),2)
+                    if (loss1 <= 1 / math.pow((k + 1 / gama), 2)):
                         W_1[I, S] = 1
-                    elif (math.pow((New_X_1[I, S] - X_1[I, S]), 2) >= 1 / math.pow(k, 2)):
+                    elif (loss1 >= 1 / math.pow(k, 2)):
                         W_1[I, S] = 0
                     else:
-                        W_1[I, S] = gama * ((1 / np.sqrt(math.pow((New_X_1[I, S] - X_1[I, S]), 2))) - k)
+                        W_1[I, S] = gama * (1 / np.sqrt(loss1) - k)
 
             for O in range(New_X_2.shape[0]):
                 for N in range(New_X_2.shape[1]):
-                    if (math.pow((New_X_2[O, N] - X_2[O, N]), 2) <= 1 / math.pow((k + 1 / gama), 2)):
+                    loss2 = math.pow((X_2[O, N] - New_X_2[O, N] + (I_2[O, N] - X_2[O, N]) * C_2[O, N]), 2)
+                    if (loss2 <= 1 / math.pow((k + 1 / gama), 2)):
                         W_2[O, N] = 1
-                    elif (math.pow((New_X_2[O, N] - X_2[O, N]), 2) >= 1 / math.pow(k, 2)):
+                    elif (loss2 >= 1 / math.pow(k, 2)):
                         W_2[O, N] = 0
                     else:
-                        W_2[O, N] = gama * (1 / np.sqrt(math.pow((New_X_2[O, N] - X_2[O, N]), 2)) - k)
+                        W_2[O, N] = gama * (1 / np.sqrt(loss2) - k)
 
             for K in range(New_X_3.shape[0]):
                 for L in range(New_X_3.shape[1]):
-                    if (math.pow((New_X_3[K, L] - X_3[K, L]), 2) <= 1 / math.pow((k + 1 / gama), 2)):
+                    loss3 = math.pow((X_3[K, L] - New_X_3[K, L] + (I_3[K, L] - X_3[K, L]) * C_3[K, L]), 2)
+                    if (loss3 <= 1 / math.pow((k + 1 / gama), 2)):
                         W_3[K, L] = 1
-                    elif (math.pow((New_X_3[K, L] - X_3[K, L]), 2) >= 1 / math.pow(k, 2)):
+                    elif (loss3 >= 1 / math.pow(k, 2)):
                         W_3[K, L] = 0
                     else:
-                        W_3[K, L] = gama * (1 / np.sqrt(math.pow((New_X_3[K, L] - X_3[K, L]), 2)) - k)
+                        W_3[K, L] = gama * (1 / np.sqrt(loss3) - k)
             k = k / 1.2
 
         predict_X = np.array(tl.fold(np.array(M * np.mat(tl.tenalg.khatri_rao([D, T])).T), 0, X.shape))

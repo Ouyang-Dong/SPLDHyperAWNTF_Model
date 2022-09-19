@@ -150,7 +150,6 @@ def construct_H_with_KNN(X, K_neigs=[7], split_diff_scale=False, is_probH=True, 
     :param m_prob: prob
     :return: N_object x N_hyperedge
     """
-
     if len(X.shape) != 2:
         X = X.reshape(-1, X.shape[-1])
 

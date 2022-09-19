@@ -1,5 +1,5 @@
 import numpy as np
-from data import MDAv2_2_GetData
+from data import MDAv3_3_GetData
 from method import model
 import tensorly as tl
 import math
@@ -136,7 +136,7 @@ class Experiments(object):
 
 if __name__ == '__main__':
     root = '..\\HMDD_data\\'
-    mir_dis_data = MDAv2_2_GetData.MDAv2_2_GetData(root)
-    experiment = Experiments(mir_dis_data, model_name='SPLDHyperAWNTF', r = 4, alpha = 1, beta = 0.0002, lam_t = 0.001, lam_c = 1, tol=1e-5,
+    mir_dis_data = MDAv3_3_GetData.MDAv3_3_GetData(root)
+    experiment = Experiments(mir_dis_data, model_name='SPLDHyperAWNTF', r = 4, alpha = 2, beta = 2, lam_t = 0.001, lam_c = 0.3, tol=1e-5,
                              max_iter=2000)
     print(experiment.CV_type())
